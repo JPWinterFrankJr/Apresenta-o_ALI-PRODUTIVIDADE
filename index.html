@@ -54,14 +54,20 @@
     }
 
     .deck {
-      width: min(100vw, 177.7778vh); height: min(56.25vw, 100vh);
-      aspect-ratio: 16/9; position: relative; overflow: hidden;
+      width: 1600px; height: 900px;
+      aspect-ratio: 16/9;
+      position: fixed;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      transform-origin: center center;
+      overflow: hidden;
       background:
         radial-gradient(circle at 12% 18%, rgba(1,179,229,.18), transparent 28%),
         radial-gradient(circle at 88% 82%, rgba(47,174,97,.14), transparent 34%),
         linear-gradient(135deg, var(--bg), var(--bg));
       box-shadow: 0 0 0 1px var(--line), 0 calc(var(--u)*2) calc(var(--u)*8) rgba(0,0,0,.42);
       isolation: isolate;
+      will-change: transform;
     }
 
     .deck::before {
@@ -1032,7 +1038,161 @@
 
     .assessment-slide {height:100%;display:grid;grid-template-rows:auto 1fr;gap:calc(var(--u)*.8);}.assessment-frame{display:grid;place-items:center;overflow:hidden;border-radius:calc(var(--u)*.8);background:#f4f4f4;border:1px solid rgba(0,0,0,.04)}.assessment-frame img{width:100%;height:100%;object-fit:contain;display:block;}
 
-    .case-slide {height:100%;display:grid;place-items:center;text-align:center;position:relative;overflow:hidden}.case-slide::before{content:"";position:absolute;width:calc(var(--u)*46);height:calc(var(--u)*46);border-radius:50%;background:radial-gradient(circle,rgba(1,179,229,.20),transparent 68%);top:calc(var(--u)*3);right:calc(var(--u)*7)}.case-content{position:relative;z-index:2}.case-slide h2{font-size:calc(var(--u)*7.5);color:#07376d;text-transform:uppercase;letter-spacing:-.06em}.case-slide p{margin-top:calc(var(--u)*1.1);font-size:calc(var(--u)*2.2);font-weight:950;color:#a71920;letter-spacing:-.03em}.case-line{margin:calc(var(--u)*2.2) auto 0;width:calc(var(--u)*28);height:calc(var(--u)*.35);border-radius:999px;background:linear-gradient(90deg,#01b3e5,#2fae61,#a71920)}
+    
+    /* === Slide 13: Case Shopping das Baterias — galeria profissional === */
+    .case-slide {
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 14px;
+      position: relative;
+    }
+    .case-gallery-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+    .case-heading h2 {
+      margin: 3px 0 0;
+      font-size: calc(var(--u)*3.0);
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: -.03em;
+      color: #07376d;
+    }
+    .case-subtitle {
+      margin: 0;
+      max-width: 470px;
+      text-align: right;
+      font-size: calc(var(--u)*1.16);
+      font-weight: 950;
+      line-height: 1.12;
+      color: #0E4478;
+      background: linear-gradient(135deg, rgba(14,68,120,.08), rgba(1,179,229,.12));
+      border: 1px solid rgba(14,68,120,.16);
+      border-radius: 14px;
+      padding: 14px 18px;
+      box-shadow: 0 6px 16px rgba(15,55,95,.08);
+    }
+    .case-photo-board {
+      height: 100%;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 560px 390px;
+      gap: 18px;
+      align-items: start;
+      justify-content: center;
+    }
+    .case-carousel,
+    .case-photo-highlight {
+      margin: 0;
+      position: relative;
+      border-radius: 14px;
+      border: 1px solid rgba(30,95,168,.12);
+      background: linear-gradient(145deg, rgba(245,249,252,.96), rgba(255,255,255,.92));
+      box-shadow: 0 8px 22px rgba(15,55,95,.08);
+      padding: 8px;
+      overflow: hidden;
+    }
+    .case-carousel {
+      height: 540px;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      gap: 12px;
+      align-self: start;
+    }
+    .case-carousel-stage,
+    .case-photo-highlight .photo-box {
+      width: 100%;
+      border-radius: 10px;
+      background: #eef4f8;
+      border: 1px solid rgba(30,95,168,.08);
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .case-carousel-stage {
+      position: relative;
+      height: 462px;
+    }
+    .case-carousel-slide {
+      position: absolute;
+      inset: 0;
+      padding: 10px;
+      display: grid;
+      place-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease;
+    }
+    .case-carousel-slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .case-carousel-slide img,
+    .case-photo-highlight img {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      object-position: center center;
+    }
+    .case-carousel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 0 4px 2px;
+    }
+    .case-carousel-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 1px solid rgba(14,68,120,.16);
+      background: white;
+      color: #0E4478;
+      font-size: 22px;
+      font-weight: 900;
+      line-height: 1;
+      display: inline-grid;
+      place-items: center;
+      box-shadow: 0 4px 12px rgba(15,55,95,.08);
+      cursor: pointer;
+    }
+    .case-carousel-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex: 1;
+    }
+    .case-carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      border: none;
+      background: rgba(14,68,120,.22);
+      cursor: pointer;
+      padding: 0;
+    }
+    .case-carousel-dot.active {
+      width: 26px;
+      background: #0E4478;
+    }
+    .case-photo-highlight {
+      height: 540px;
+      align-self: start;
+      display: grid;
+      place-items: center;
+    }
+    .case-photo-highlight .photo-box {
+      height: 100%;
+      display: grid;
+      place-items: center;
+      padding: 10px;
+    }
 
     .three-points-new {height:100%;display:grid;grid-template-columns:.82fr 1.18fr;gap:calc(var(--u)*3);align-items:center}.three-points-new h2{font-size:calc(var(--u)*4.3);text-transform:none;color:#07376d;letter-spacing:-.05em;line-height:1}.three-stack{display:grid;gap:calc(var(--u)*1.25)}.focus-card{position:relative;border-radius:calc(var(--u)*1.4);padding:calc(var(--u)*1.45) calc(var(--u)*1.5) calc(var(--u)*1.45) calc(var(--u)*6.6);background:linear-gradient(145deg,rgba(255,255,255,.88),rgba(255,255,255,.62));border:1px solid rgba(30,95,168,.12);box-shadow:0 calc(var(--u)*.8) calc(var(--u)*2.4) rgba(30,95,168,.08);overflow:hidden}.focus-card::before{content:attr(data-n);position:absolute;left:calc(var(--u)*1.25);top:50%;transform:translateY(-50%);width:calc(var(--u)*4);height:calc(var(--u)*4);border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#1e66ff,#01b3e5);color:white;font-weight:950;font-size:calc(var(--u)*1.3)}.focus-card h3{margin:0 0 calc(var(--u)*.35);font-size:calc(var(--u)*1.65);color:#111;font-weight:950}.focus-card p{font-size:calc(var(--u)*1.02);font-weight:850;color:rgba(0,0,0,.66)}
 
@@ -1667,52 +1827,6 @@
       font-size: calc(var(--u)*.52) !important;
       color: rgba(8,46,97,.34) !important;
       letter-spacing: .10em !important;
-    }
-
-
-  
-
-    /* === Compatibilidade fixa 16:9 para celular, monitor e telão === */
-    html, body {
-      width: 100vw !important;
-      height: 100vh !important;
-      height: 100dvh !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      overflow: hidden !important;
-      overscroll-behavior: none;
-      touch-action: manipulation;
-    }
-    body {
-      min-height: 100vh !important;
-      min-height: 100dvh !important;
-      display: grid !important;
-      place-items: center !important;
-    }
-    .deck {
-      width: min(100vw, 177.7778vh) !important;
-      height: min(56.25vw, 100vh) !important;
-      aspect-ratio: 16 / 9 !important;
-      max-width: 100vw !important;
-      max-height: 100vh !important;
-      max-height: 100dvh !important;
-      margin: auto !important;
-      transform: translateZ(0);
-      transform-origin: center center;
-      contain: layout paint;
-      overflow: hidden !important;
-    }
-    @supports (height: 100dvh) {
-      .deck {
-        width: min(100vw, 177.7778dvh) !important;
-        height: min(56.25vw, 100dvh) !important;
-      }
-    }
-    .slide {
-      inset: 0 !important;
-      width: 100% !important;
-      height: 100% !important;
-      overflow: hidden !important;
     }
     img, canvas, svg, video {
       max-width: 100%;
@@ -3462,11 +3576,11 @@
     #deck:fullscreen,
     #deck:-webkit-full-screen,
     .deck.browser-fullscreen-mode {
-      width: 100vw !important;
-      height: 100vh !important;
-      max-width: 100vw !important;
-      max-height: 100vh !important;
-      aspect-ratio: auto !important;
+      width: 1600px !important;
+      height: 900px !important;
+      max-width: none !important;
+      max-height: none !important;
+      aspect-ratio: 16/9 !important;
       border-radius: 0 !important;
       box-shadow: none !important;
     }
@@ -3485,89 +3599,106 @@
       content: "";
     }
 
-    @media (max-width: 700px) {
-      .fullscreen-toggle {
-        min-width: calc(var(--u)*4.1);
-        width: calc(var(--u)*4.1);
-        padding: 0;
-      }
-      .fullscreen-toggle .fs-label { display: none; }
-    }
-
   
 
     /* === Slide de diagnóstico em campo e depoimento em vídeo === */
     .field-slide {
       height: 100%;
       display: grid;
-      grid-template-columns: .98fr 1.02fr;
-      gap: calc(var(--u)*2.8);
-      align-items: center;
+      grid-template-columns: .84fr 1.16fr;
+      gap: calc(var(--u)*1.8);
+      align-items: stretch;
       position: relative;
+    }
+    .field-copy,
+    .ali-action-panel {
+      border-radius: calc(var(--u)*1.35);
+      border: 1px solid rgba(30,95,168,.11);
+      background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(250,252,255,.95));
+      box-shadow: 0 calc(var(--u)*.8) calc(var(--u)*2.6) rgba(30,95,168,.08);
+      overflow: hidden;
+      min-height: calc(var(--u)*30.5);
+    }
+    .field-copy {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      align-content: stretch;
+      padding: calc(var(--u)*2.2) calc(var(--u)*2.2) calc(var(--u)*1.9);
+      position: relative;
+    }
+    .field-copy::after,
+    .ali-action-panel::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: calc(var(--u)*.26);
+      background: linear-gradient(90deg, rgba(30,95,168,.85), rgba(1,179,229,.45));
+      opacity: .95;
     }
     .field-copy h2 {
-      font-size: calc(var(--u)*4.6);
+      margin: 0;
+      font-size: calc(var(--u)*3.35);
       text-transform: none;
       color: #07376d;
-      letter-spacing: -.055em;
-      line-height: .98;
-      margin-bottom: calc(var(--u)*1.5);
+      letter-spacing: -.05em;
+      line-height: 1.02;
+      max-width: calc(var(--u)*23);
+      align-self: start;
     }
-    .field-list {
+    .field-question-wrap {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: calc(var(--u)*.85);
-      margin-top: calc(var(--u)*1.1);
+      place-items: center;
+      height: 100%;
     }
-    .field-list div {
-      border-radius: calc(var(--u)*1);
-      border: 1px solid rgba(30,95,168,.12);
-      background: linear-gradient(145deg, rgba(255,255,255,.90), rgba(255,255,255,.62));
-      box-shadow: 0 calc(var(--u)*.65) calc(var(--u)*1.8) rgba(30,95,168,.07);
-      padding: calc(var(--u)*.95) calc(var(--u)*1.05);
-      font-size: calc(var(--u)*.98);
-      font-weight: 900;
-      color: rgba(0,31,75,.78);
-      line-height: 1.2;
+    .field-question-visual {
+      width: calc(var(--u)*16.2);
+      height: calc(var(--u)*16.2);
+      border-radius: 50%;
+      border: 1px solid rgba(30,95,168,.13);
+      background: radial-gradient(circle at 50% 40%, rgba(1,179,229,.05), rgba(1,179,229,.01) 62%, transparent 100%);
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+    .field-question-visual::before {
+      content: "";
+      position: absolute;
+      inset: calc(var(--u)*.95);
+      border-radius: 50%;
+      border: 1px solid rgba(30,95,168,.08);
+    }
+    .field-question-visual span {
+      font-family: "Playfair Display", serif;
+      font-size: calc(var(--u)*8.1);
+      line-height: 1;
+      color: rgba(7,55,109,.82);
+      transform: translateY(calc(var(--u)*-.28));
     }
     .ali-action-panel {
-      border-radius: calc(var(--u)*1.55);
-      background: linear-gradient(145deg, rgba(7,55,109,.97), rgba(1,143,207,.82));
-      box-shadow: var(--shadow);
-      padding: calc(var(--u)*1.7);
-      color: white;
       position: relative;
-      overflow: hidden;
-      min-height: calc(var(--u)*30);
       display: grid;
-      align-content: start;
-      gap: calc(var(--u)*.95);
-    }
-    .ali-action-panel::before {
-      content:"";
-      position:absolute;
-      width: calc(var(--u)*18);
-      height: calc(var(--u)*18);
-      border-radius: 50%;
-      right: calc(var(--u)*-5);
-      top: calc(var(--u)*-5);
-      background: rgba(255,255,255,.12);
+      grid-template-rows: auto 1fr;
+      padding: calc(var(--u)*1.45) calc(var(--u)*1.45) calc(var(--u)*1.3);
+      gap: calc(var(--u)*.85);
     }
     .ali-action-panel h3 {
       margin: 0;
-      font-size: calc(var(--u)*2.05);
+      font-size: calc(var(--u)*1.9);
+      color: #07376d;
       letter-spacing: -.04em;
-      line-height: 1.04;
+      line-height: 1.05;
       position: relative;
       z-index: 2;
     }
     .ali-diagram {
-      position: relative;
-      z-index: 2;
-      border-radius: calc(var(--u)*1.1);
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.12);
-      padding: calc(var(--u)*.55);
+      border-radius: calc(var(--u)*.95);
+      background: linear-gradient(180deg, rgba(245,249,252,.95), rgba(255,255,255,.88));
+      border: 1px solid rgba(30,95,168,.08);
+      padding: calc(var(--u)*.45);
+      display: grid;
+      align-items: center;
     }
     .ali-diagram svg {
       display: block;
@@ -3674,88 +3805,65 @@
 <div class="title-slide"><div><div class="kicker">Produtividade · Varejo</div><h1>Produtividade que vende: o que <span class="realmente">REALMENTE</span> move o ponteiro no varejo</h1></div></div>
 </section><section class="slide" data-title="O que encontrei em campo">
 <div class="field-slide">
-<div class="field-copy">
-<div class="kicker">Diagnóstico em campo</div>
-<h2>O que encontrei em campo:</h2>
-<div class="field-list">
-<div>🔹 Retrabalho em processos</div>
-<div>🔹 Atendimento ao cliente</div>
-<div>🔹 Resistência à inovação</div>
-<div>🔹 Falta de indicadores</div>
-<div>🔹 Estoque</div>
-<div>🔹 Cultura organizacional</div>
-</div>
-</div>
-<div class="ali-action-panel">
-<h3>Como o projeto ALI soluciona:</h3>
-<div class="ali-diagram">
-<svg aria-label="Fluxo simples da atuação do projeto ALI" role="img" viewBox="0 0 760 430" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<linearGradient id="painFillSimple" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95"/>
-<stop offset="100%" stop-color="#D9F2FF" stop-opacity="0.90"/>
-</linearGradient>
-<linearGradient id="hubFillSimple" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0%" stop-color="#55D7FF"/>
-<stop offset="100%" stop-color="#9BF2FF"/>
-</linearGradient>
-<linearGradient id="stepFillSimple" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0%" stop-color="#0B4E8A"/>
-<stop offset="100%" stop-color="#1188C7"/>
-</linearGradient>
-<filter id="shadowSimple" x="-20%" y="-20%" width="140%" height="140%">
-<feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#001C33" flood-opacity="0.16"/>
-</filter>
-</defs>
+  <div class="field-copy">
+    <h2>O que encontrei em campo:</h2>
+    <div class="field-question-wrap">
+      <div aria-hidden="true" class="field-question-visual"><span>?</span></div>
+    </div>
+  </div>
+  <div class="ali-action-panel">
+    <h3>Como o projeto soluciona</h3>
+    <div class="ali-diagram">
+      <svg aria-label="Fluxo minimalista de como o projeto soluciona" role="img" viewBox="0 0 760 380" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="s1" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#103B61" flood-opacity="0.08"/>
+          </filter>
+        </defs>
 
-<rect x="24" y="48" width="165" height="50" rx="16" fill="url(#painFillSimple)" filter="url(#shadowSimple)"/>
-<text x="106.5" y="79" text-anchor="middle" fill="#083B6A" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="800">Processos</text>
+        <rect x="30" y="46" width="170" height="36" rx="12" fill="#FFFFFF" stroke="#D7E5F1" filter="url(#s1)"/>
+        <text x="115" y="69" text-anchor="middle" fill="#0E4478" font-size="16" font-family="Inter, Arial, sans-serif" font-weight="700">Processos</text>
 
-<rect x="24" y="112" width="165" height="50" rx="16" fill="url(#painFillSimple)" filter="url(#shadowSimple)"/>
-<text x="106.5" y="143" text-anchor="middle" fill="#083B6A" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="800">Atendimento</text>
+        <rect x="30" y="92" width="170" height="36" rx="12" fill="#FFFFFF" stroke="#D7E5F1" filter="url(#s1)"/>
+        <text x="115" y="115" text-anchor="middle" fill="#0E4478" font-size="16" font-family="Inter, Arial, sans-serif" font-weight="700">Atendimento</text>
 
-<rect x="24" y="176" width="165" height="50" rx="16" fill="url(#painFillSimple)" filter="url(#shadowSimple)"/>
-<text x="106.5" y="207" text-anchor="middle" fill="#083B6A" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="800">Indicadores</text>
+        <rect x="30" y="138" width="170" height="36" rx="12" fill="#FFFFFF" stroke="#D7E5F1" filter="url(#s1)"/>
+        <text x="115" y="161" text-anchor="middle" fill="#0E4478" font-size="16" font-family="Inter, Arial, sans-serif" font-weight="700">Indicadores</text>
 
-<rect x="24" y="240" width="165" height="50" rx="16" fill="url(#painFillSimple)" filter="url(#shadowSimple)"/>
-<text x="106.5" y="271" text-anchor="middle" fill="#083B6A" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="800">Estoque</text>
+        <rect x="30" y="184" width="170" height="36" rx="12" fill="#FFFFFF" stroke="#D7E5F1" filter="url(#s1)"/>
+        <text x="115" y="207" text-anchor="middle" fill="#0E4478" font-size="16" font-family="Inter, Arial, sans-serif" font-weight="700">Estoque</text>
 
-<rect x="24" y="304" width="165" height="50" rx="16" fill="url(#painFillSimple)" filter="url(#shadowSimple)"/>
-<text x="106.5" y="335" text-anchor="middle" fill="#083B6A" font-size="18" font-family="Inter, Arial, sans-serif" font-weight="800">Cultura e inovação</text>
+        <rect x="30" y="230" width="170" height="36" rx="12" fill="#FFFFFF" stroke="#D7E5F1" filter="url(#s1)"/>
+        <text x="115" y="253" text-anchor="middle" fill="#0E4478" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="700">Cultura e inovação</text>
 
-<path d="M190 72 C250 72, 255 108, 285 162" fill="none" stroke="rgba(255,255,255,0.62)" stroke-width="4"/>
-<path d="M190 136 C252 136, 258 146, 288 180" fill="none" stroke="rgba(255,255,255,0.62)" stroke-width="4"/>
-<path d="M190 200 C256 200, 260 200, 292 202" fill="none" stroke="rgba(255,255,255,0.62)" stroke-width="4"/>
-<path d="M190 264 C252 264, 258 254, 288 226" fill="none" stroke="rgba(255,255,255,0.62)" stroke-width="4"/>
-<path d="M190 328 C250 328, 255 292, 285 246" fill="none" stroke="rgba(255,255,255,0.62)" stroke-width="4"/>
+        <path d="M201 64 C258 64, 272 108, 304 162" fill="none" stroke="#C7D8E7" stroke-width="2.5"/>
+        <path d="M201 110 C264 110, 276 136, 308 176" fill="none" stroke="#C7D8E7" stroke-width="2.5"/>
+        <path d="M201 156 C268 156, 278 174, 310 188" fill="none" stroke="#C7D8E7" stroke-width="2.5"/>
+        <path d="M201 202 C264 202, 276 212, 308 200" fill="none" stroke="#C7D8E7" stroke-width="2.5"/>
+        <path d="M201 248 C258 248, 272 236, 304 214" fill="none" stroke="#C7D8E7" stroke-width="2.5"/>
 
-<circle cx="345" cy="204" r="78" fill="url(#hubFillSimple)" filter="url(#shadowSimple)"/>
-<circle cx="345" cy="204" r="89" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="2" stroke-dasharray="8 8"/>
-<text x="345" y="188" text-anchor="middle" fill="#073D69" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="900">Projeto ALI</text>
-<text x="345" y="214" text-anchor="middle" fill="#083B6A" font-size="17" font-family="Inter, Arial, sans-serif" font-weight="800">Diagnostica</text>
-<text x="345" y="236" text-anchor="middle" fill="#083B6A" font-size="17" font-family="Inter, Arial, sans-serif" font-weight="800">e direciona</text>
+        <circle cx="374" cy="188" r="64" fill="#F6FBFF" stroke="#0E4478" stroke-width="2.2"/>
+        <circle cx="374" cy="188" r="74" fill="none" stroke="#D7E5F1" stroke-width="1.5" stroke-dasharray="7 7"/>
+        <text x="374" y="198" text-anchor="middle" fill="#0E4478" font-size="32" font-family="Inter, Arial, sans-serif" font-weight="800">ALI</text>
 
-<path d="M432 136 H 495" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="4"/>
-<path d="M432 204 H 495" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="4"/>
-<path d="M432 272 H 495" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="4"/>
-<polygon points="490,130 506,136 490,142" fill="rgba(255,255,255,0.78)"/>
-<polygon points="490,198 506,204 490,210" fill="rgba(255,255,255,0.78)"/>
-<polygon points="490,266 506,272 490,278" fill="rgba(255,255,255,0.78)"/>
+        <path d="M450 128 H 496" fill="none" stroke="#C7D8E7" stroke-width="2.5"/>
+        <path d="M450 188 H 496" fill="none" stroke="#C7D8E7" stroke-width="2.5"/>
+        <path d="M450 248 H 496" fill="none" stroke="#C7D8E7" stroke-width="2.5"/>
+        <polygon points="492,123 505,128 492,133" fill="#9BBAD5"/>
+        <polygon points="492,183 505,188 492,193" fill="#9BBAD5"/>
+        <polygon points="492,243 505,248 492,253" fill="#9BBAD5"/>
 
-<rect x="512" y="108" width="192" height="56" rx="18" fill="url(#stepFillSimple)" filter="url(#shadowSimple)"/>
-<text x="608" y="142" text-anchor="middle" fill="#FFFFFF" font-size="21" font-family="Inter, Arial, sans-serif" font-weight="900">Prioriza</text>
+        <rect x="515" y="104" width="170" height="46" rx="14" fill="#0E4478" filter="url(#s1)"/>
+        <text x="600" y="132" text-anchor="middle" fill="#FFFFFF" font-size="18" font-family="Inter, Arial, sans-serif" font-weight="700">Prioriza</text>
 
-<rect x="512" y="176" width="192" height="56" rx="18" fill="url(#stepFillSimple)" filter="url(#shadowSimple)"/>
-<text x="608" y="210" text-anchor="middle" fill="#FFFFFF" font-size="21" font-family="Inter, Arial, sans-serif" font-weight="900">Implementa</text>
+        <rect x="515" y="164" width="170" height="46" rx="14" fill="#0E4478" filter="url(#s1)"/>
+        <text x="600" y="192" text-anchor="middle" fill="#FFFFFF" font-size="18" font-family="Inter, Arial, sans-serif" font-weight="700">Implementa</text>
 
-<rect x="512" y="244" width="192" height="56" rx="18" fill="url(#stepFillSimple)" filter="url(#shadowSimple)"/>
-<text x="608" y="278" text-anchor="middle" fill="#FFFFFF" font-size="21" font-family="Inter, Arial, sans-serif" font-weight="900">Acompanha</text>
-
-<rect x="210" y="378" width="340" height="34" rx="16" fill="rgba(255,255,255,0.14)" stroke="rgba(255,255,255,0.18)"/>
-<text x="380" y="400" text-anchor="middle" fill="#FFFFFF" font-size="17" font-family="Inter, Arial, sans-serif" font-weight="800">Mais organização, controle e produtividade.</text>
-</svg>
-</div>
-</div>
+        <rect x="515" y="224" width="170" height="46" rx="14" fill="#0E4478" filter="url(#s1)"/>
+        <text x="600" y="252" text-anchor="middle" fill="#FFFFFF" font-size="18" font-family="Inter, Arial, sans-serif" font-weight="700">Acompanha</text>
+      </svg>
+    </div>
+  </div>
 </div>
 </section><section class="slide" data-title="O Método">
 <div class="word-image">
@@ -3982,7 +4090,44 @@
 </div>
 </div>
 </section><section class="slide" data-title="Case">
-<div class="case-slide"><div class="case-content"><div class="kicker">Aplicação prática</div><h2>Case</h2><p>Diagnóstico x Prioridade x Execução</p><div class="case-line"></div></div></div>
+<div class="case-slide">
+  <div class="case-gallery-header">
+    <div class="case-heading">
+      <div class="kicker">Aplicação prática</div>
+      <h2>CASE</h2>
+    </div>
+    <p class="case-subtitle">Diagnóstico x Prioridade x Execução</p>
+  </div>
+
+  <div class="case-photo-board">
+    <div class="case-carousel" data-case-carousel>
+      <div class="case-carousel-stage">
+        <div class="case-carousel-slide active">
+          <img alt="Fachada principal do Shopping das Baterias" src="assets/images/case-shopping-baterias-01.png"/>
+        </div>
+        <div class="case-carousel-slide">
+          <img alt="Vista ampla do entorno do Shopping das Baterias" src="assets/images/case-shopping-baterias-02.png"/>
+        </div>
+        <div class="case-carousel-slide">
+          <img alt="Acesso lateral do Shopping das Baterias" src="assets/images/case-shopping-baterias-03.png"/>
+        </div>
+      </div>
+      <div class="case-carousel-controls">
+        <button class="case-carousel-btn prev" type="button" aria-label="Foto anterior">‹</button>
+        <div class="case-carousel-dots">
+          <button class="case-carousel-dot active" type="button" aria-label="Mostrar foto 1"></button>
+          <button class="case-carousel-dot" type="button" aria-label="Mostrar foto 2"></button>
+          <button class="case-carousel-dot" type="button" aria-label="Mostrar foto 3"></button>
+        </div>
+        <button class="case-carousel-btn next" type="button" aria-label="Próxima foto">›</button>
+      </div>
+    </div>
+
+    <figure class="case-photo-highlight">
+      <div class="photo-box"><img alt="Equipe do Shopping das Baterias em destaque" src="assets/images/case-shopping-baterias-destaque.png"/></div>
+    </figure>
+  </div>
+</div>
 </section><section class="slide" data-title="Depoimento">
 <div class="testimonial-video-slide">
 <div class="testimonial-copy">
@@ -4137,18 +4282,16 @@
     function fitDeckToViewport() {
       const deck = document.querySelector('#deck');
       if (!deck) return;
+      const baseWidth = 1600;
+      const baseHeight = 900;
+      const baseUnit = 16;
       const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
       const viewportHeight = (window.visualViewport && window.visualViewport.height) || window.innerHeight || document.documentElement.clientHeight;
-      const targetAspect = 16 / 9;
-      let deckWidth = viewportWidth;
-      let deckHeight = deckWidth / targetAspect;
-      if (deckHeight > viewportHeight) {
-        deckHeight = viewportHeight;
-        deckWidth = deckHeight * targetAspect;
-      }
-      deck.style.width = `${deckWidth}px`;
-      deck.style.height = `${deckHeight}px`;
-      document.documentElement.style.setProperty('--u', `${Math.min(deckWidth / 100, deckHeight / 56.25)}px`);
+      const scale = Math.min(viewportWidth / baseWidth, viewportHeight / baseHeight);
+      deck.style.width = `${baseWidth}px`;
+      deck.style.height = `${baseHeight}px`;
+      deck.style.transform = `translate(-50%, -50%) scale(${scale})`;
+      document.documentElement.style.setProperty('--u', `${baseUnit}px`);
     }
 
     fitDeckToViewport();
@@ -4171,7 +4314,35 @@
     const dots = [...document.querySelectorAll('.dot')];
     const slideActivationCallbacks = [];
 
+    // Carregamento por slide: imagens, vídeos e animações só entram quando o slide é aberto.
+    slides.forEach((slide) => {
+      slide.querySelectorAll('img, video, source').forEach((media) => {
+        const src = media.getAttribute('src');
+        if (!src) return;
+        media.setAttribute('data-src', src);
+        media.removeAttribute('src');
+        if (media.tagName.toLowerCase() === 'video') {
+          media.preload = 'none';
+        }
+      });
+    });
+
+    function loadSlideAssets(index) {
+      const slide = slides[index];
+      if (!slide || slide.dataset.assetsLoaded === 'true') return;
+      slide.querySelectorAll('[data-src]').forEach((media) => {
+        const src = media.getAttribute('data-src');
+        if (!src) return;
+        media.setAttribute('src', src);
+        if (media.tagName.toLowerCase() === 'video') {
+          media.load();
+        }
+      });
+      slide.dataset.assetsLoaded = 'true';
+    }
+
     function update() {
+      loadSlideAssets(current);
       slides.forEach((slide, index) => {
         const isActive = index === current;
         slide.classList.toggle('active', isActive);
@@ -4592,6 +4763,26 @@
         });
         if (index === 0) activateFigure(button);
       });
+    }
+
+    const caseCarousel = document.querySelector('[data-case-carousel]');
+    if (caseCarousel) {
+      const slides = [...caseCarousel.querySelectorAll('.case-carousel-slide')];
+      const dots = [...caseCarousel.querySelectorAll('.case-carousel-dot')];
+      const prev = caseCarousel.querySelector('.case-carousel-btn.prev');
+      const next = caseCarousel.querySelector('.case-carousel-btn.next');
+      let currentIndex = 0;
+
+      const renderCaseSlide = (index) => {
+        currentIndex = (index + slides.length) % slides.length;
+        slides.forEach((slide, i) => slide.classList.toggle('active', i === currentIndex));
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+      };
+
+      prev && prev.addEventListener('click', () => renderCaseSlide(currentIndex - 1));
+      next && next.addEventListener('click', () => renderCaseSlide(currentIndex + 1));
+      dots.forEach((dot, i) => dot.addEventListener('click', () => renderCaseSlide(i)));
+      renderCaseSlide(0);
     }
 
     update();
