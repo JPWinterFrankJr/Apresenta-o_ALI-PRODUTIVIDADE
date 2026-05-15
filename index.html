@@ -3778,6 +3778,189 @@
   visibility: visible;
 }
 
+
+
+    /* === AJUSTE PROFISSIONAL — Slide 13 | Case Shopping das Baterias === */
+    .case-slide-v2 {
+      grid-template-rows: auto 1fr !important;
+      gap: calc(var(--u)*1.15) !important;
+      padding-top: calc(var(--u)*.15);
+    }
+
+    .case-gallery-header-v2 {
+      display: grid !important;
+      place-items: center !important;
+      min-height: calc(var(--u)*5.7);
+    }
+
+    .case-title-center {
+      width: 100%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+    }
+
+    .case-title-center h2 {
+      margin: 0 !important;
+      font-size: calc(var(--u)*5.15) !important;
+      line-height: .88 !important;
+      text-transform: uppercase !important;
+      letter-spacing: -.045em !important;
+      color: #07376d !important;
+      text-shadow: 0 calc(var(--u)*.22) calc(var(--u)*.8) rgba(30,95,168,.16);
+    }
+
+    .case-slide-v2 .case-subtitle,
+    .case-slide-v2 .case-heading,
+    .case-slide-v2 .kicker { display: none !important; }
+
+    .case-main-area {
+      height: 100%;
+      min-height: 0;
+      display: grid !important;
+      grid-template-columns: 282px 968px !important;
+      gap: 26px !important;
+      align-items: start !important;
+      justify-content: center !important;
+      position: relative !important;
+    }
+
+    .case-left-panel {
+      position: relative !important;
+      left: auto !important;
+      top: auto !important;
+      width: 282px !important;
+      height: 540px !important;
+      z-index: 8 !important;
+      display: grid !important;
+      grid-template-rows: 148px 1fr;
+      gap: 16px;
+      align-self: start !important;
+      padding: 0 !important;
+    }
+
+    .case-logo-card {
+      order: 1;
+      border-radius: 20px;
+      background: linear-gradient(145deg, #ffffff, #f6fbff);
+      border: 1px solid rgba(30,95,168,.16);
+      box-shadow: 0 14px 32px rgba(15,55,95,.12);
+      padding: 18px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .case-logo-card::after {
+      content: "";
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 12px;
+      height: 4px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #FFD52E, #1E5FA8);
+      opacity: .95;
+    }
+
+    .case-logo-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 92px;
+      object-fit: contain;
+      border-radius: 0;
+    }
+
+    .case-vertical-phrase {
+      order: 2;
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 12px;
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(1,179,229,.13), transparent 42%),
+        linear-gradient(145deg, rgba(255,255,255,.92), rgba(245,249,252,.74));
+      border: 1px solid rgba(30,95,168,.14);
+      box-shadow: 0 14px 32px rgba(15,55,95,.10);
+      padding: 22px 18px;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .case-vertical-phrase::before {
+      content: "";
+      position: absolute;
+      top: 24px;
+      bottom: 24px;
+      left: 28px;
+      width: 4px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #01B3E5, #2FAE61, #FFD52E);
+      opacity: .8;
+    }
+
+    .case-vertical-phrase span {
+      display: block;
+      width: 100%;
+      color: #07376d;
+      font-weight: 950;
+      font-size: 26px;
+      line-height: 1.04;
+      letter-spacing: -.035em;
+      padding-left: 20px;
+    }
+
+    .case-vertical-phrase strong {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: #07376d;
+      color: #ffffff;
+      font-size: 18px;
+      line-height: 1;
+      font-weight: 950;
+      box-shadow: 0 6px 14px rgba(7,55,109,.20);
+    }
+
+    .case-slide-v2 .case-photo-board {
+      width: 968px !important;
+      height: 540px !important;
+      margin: 0 !important;
+      display: grid !important;
+      grid-template-columns: 560px 390px !important;
+      gap: 18px !important;
+      justify-content: center !important;
+      align-items: start !important;
+    }
+
+    .case-slide-v2 .case-carousel,
+    .case-slide-v2 .case-photo-highlight {
+      height: 540px !important;
+      border-radius: 22px !important;
+      border: 1px solid rgba(30,95,168,.14) !important;
+      background: linear-gradient(145deg, rgba(255,255,255,.96), rgba(245,249,252,.92)) !important;
+      box-shadow: 0 16px 36px rgba(15,55,95,.12) !important;
+      padding: 9px !important;
+    }
+
+    .case-slide-v2 .case-carousel-stage {
+      height: 462px !important;
+      border-radius: 16px !important;
+      background: #eef4f8 !important;
+    }
+
+    .case-slide-v2 .case-photo-highlight .photo-box {
+      height: 100% !important;
+      border-radius: 16px !important;
+      background: #eef4f8 !important;
+      padding: 10px !important;
+    }
 </style>
 </head>
 <body>
@@ -4096,16 +4279,28 @@
 </div>
 </div>
 </section><section class="slide" data-title="Case">
-<div class="case-slide">
-  <div class="case-gallery-header">
-    <div class="case-heading">
-      <div class="kicker">Aplicação prática</div>
+<div class="case-slide case-slide-v2">
+  <div class="case-gallery-header case-gallery-header-v2">
+    <div class="case-title-center">
       <h2>CASE</h2>
     </div>
-    <p class="case-subtitle">Diagnóstico x Prioridade x Execução</p>
   </div>
 
-  <div class="case-photo-board">
+  <div class="case-main-area">
+    <aside class="case-left-panel" aria-label="Estrutura do case">
+      <div class="case-vertical-phrase">
+        <span>Diagnóstico</span>
+        <strong>x</strong>
+        <span>Prioridade</span>
+        <strong>x</strong>
+        <span>Execução</span>
+      </div>
+      <div class="case-logo-card">
+        <img alt="Logo Shopping das Baterias" src="assets/images/shopping-baterias-logo.png"/>
+      </div>
+    </aside>
+
+    <div class="case-photo-board">
     <div class="case-carousel" data-case-carousel>
       <div class="case-carousel-stage">
         <div class="case-carousel-slide active">
@@ -4132,6 +4327,7 @@
     <figure class="case-photo-highlight">
       <div class="photo-box"><img alt="Equipe do Shopping das Baterias em destaque" src="assets/images/case-shopping-baterias-destaque.png"/></div>
     </figure>
+    </div>
   </div>
 </div>
 </section><section class="slide" data-title="Depoimento">
