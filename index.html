@@ -3,7 +3,7 @@
 <html data-theme="light" lang="pt-BR">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
 <title>Produtividade que vende | ALI</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -3573,6 +3573,11 @@
       line-height: 1;
     }
 
+    :fullscreen,
+    :-webkit-full-screen {
+      background: var(--bg) !important;
+    }
+
     #deck:fullscreen,
     #deck:-webkit-full-screen,
     .deck.browser-fullscreen-mode {
@@ -3583,6 +3588,7 @@
       aspect-ratio: 16/9 !important;
       border-radius: 0 !important;
       box-shadow: none !important;
+      overflow: hidden !important;
     }
 
     #deck:fullscreen .fullscreen-toggle,
@@ -4223,13 +4229,14 @@
 
     const deckElement = document.querySelector('#deck');
     const fullscreenBtn = document.querySelector('#fullscreenBtn');
+    const fullscreenRoot = document.documentElement;
 
     function getFullscreenElement() {
       return document.fullscreenElement || document.webkitFullscreenElement || null;
     }
 
     function isDeckFullscreen() {
-      return getFullscreenElement() === deckElement || deckElement?.classList.contains('browser-fullscreen-mode');
+      return Boolean(getFullscreenElement()) || deckElement?.classList.contains('browser-fullscreen-mode');
     }
 
     function updateFullscreenButton() {
@@ -4241,7 +4248,7 @@
       const label = fullscreenBtn.querySelector('.fs-label');
       if (icon) icon.textContent = active ? '×' : '⛶';
       if (label) label.textContent = active ? 'Fechar' : 'Tela cheia';
-      fitDeckToViewport();
+      requestAnimationFrame(fitDeckToViewport);
     }
 
     async function toggleFullscreen() {
@@ -4252,17 +4259,18 @@
           if (document.exitFullscreen) await document.exitFullscreen();
           else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
           deckElement.classList.remove('browser-fullscreen-mode');
-        } else if (deckElement.requestFullscreen) {
-          await deckElement.requestFullscreen({ navigationUI: 'hide' });
-        } else if (deckElement.webkitRequestFullscreen) {
-          deckElement.webkitRequestFullscreen();
+        } else if (fullscreenRoot.requestFullscreen) {
+          await fullscreenRoot.requestFullscreen({ navigationUI: 'hide' });
+        } else if (fullscreenRoot.webkitRequestFullscreen) {
+          fullscreenRoot.webkitRequestFullscreen();
         } else {
           deckElement.classList.toggle('browser-fullscreen-mode');
         }
       } catch (error) {
         deckElement.classList.toggle('browser-fullscreen-mode');
       } finally {
-        setTimeout(updateFullscreenButton, 80);
+        setTimeout(updateFullscreenButton, 120);
+        setTimeout(fitDeckToViewport, 260);
       }
     }
 
@@ -4285,8 +4293,16 @@
       const baseWidth = 1600;
       const baseHeight = 900;
       const baseUnit = 16;
-      const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
-      const viewportHeight = (window.visualViewport && window.visualViewport.height) || window.innerHeight || document.documentElement.clientHeight;
+      const viewportWidth = Math.max(
+        window.innerWidth || 0,
+        document.documentElement.clientWidth || 0,
+        window.visualViewport ? Math.round(window.visualViewport.width) : 0
+      );
+      const viewportHeight = Math.max(
+        window.innerHeight || 0,
+        document.documentElement.clientHeight || 0,
+        window.visualViewport ? Math.round(window.visualViewport.height) : 0
+      );
       const scale = Math.min(viewportWidth / baseWidth, viewportHeight / baseHeight);
       deck.style.width = `${baseWidth}px`;
       deck.style.height = `${baseHeight}px`;
